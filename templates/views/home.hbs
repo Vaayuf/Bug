@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Projects</title>
+    <style>
+      
+    </style>
+
+    <link rel="stylesheet" href="css/home.css">
+  </head>
+
+
+<body>
+
+    <div class="topnav">
+  <a  href="/">Logout</a>
+</div>
+    <div class="openBtn">
+      <button class="openButton" onclick="openForm()"><strong>Add Bugs</strong></button>
+    </div>
+    <br/>
+    <div class="loginPopup">
+      <div class="formPopup" id="popupForm">
+        <form action="/projhome" method="POST" class="formContainer">
+          <h2>Add Bugs</h2>
+          <label for="bugname">
+            <strong>Name</strong>
+          </label>
+          <input type="text" id="bugname" placeholder="Name" name="bugname" required>
+          <label for="description">
+            <strong>Description</strong>
+          </label>
+          <input type="text" id="description" placeholder="Description" name="description" required>
+          <div class="radio">
+                    <input type="radio" id="low" name="threat" value="low">
+                    <label for="low">Low</label><br>
+                    <input type="radio" id="moderate" name="threat" value="moderate">
+                    <label for="moderate">Moderate</label><br>
+                    <input type="radio" id="critical" name="threat" value="critical">
+                    <label for="critical">Critical</label></br>
+                </div>
+          <button type="submit" class="btn">Submit</button>
+           
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+    </div>
+    <br/>
+    <script>
+      function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+    </script>
+    
+    <table class="styled-table">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Threat Level</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each result}}
+            <tr>
+                <td>{{this.bugname}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.threat}}</td>
+                <form action="" method="">
+                    <td>Update</td>
+                </form>
+                
+                    <td><button name={{this.bugname}}>Delete</button></td>
+                
+            </tr>
+            {{/each}}
+        </tbody>
+        
+        
+    </table>
+  </body>
