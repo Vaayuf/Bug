@@ -92,18 +92,39 @@ app.post('/login', async(req,res)=>{
     }
 })
 
-app.delete('/home', async(req,res)=>{
-    Project.deleteOne(
-        {bugname: req.body.name}
-        
-    )
 
-    console.log('deleted');
+app.get('/home', async(req,res)=>{
+    
     const projectreport = await Project.find();
-            //console.log(bugreport);
-            res.render('home',{result:projectreport});
-
+    res.render('home',{result:projectreport});
 })
+
+
+app.get('/home/delete/:id', async(req,res) =>{
+    try{
+            const updateProject =  await Project.findByIdAndDelete(req.params.id);
+            const projectreport = await Project.find();
+            res.render('home',{result:projectreport});
+        
+        }catch(e){
+        res.send(e);
+    }
+})
+
+
+
+app.get('/home/update/:id', async(req,res) =>{
+    try{
+            const updateProject = await Project.findByIdAndUpdate(req.params.id,req.body);
+           // console.log(updateProject);
+
+            const projectreport = await Project.find();
+            res.render('home',{result:projectreport});
+    }catch(e){
+        res.send(e);
+    }
+})
+
 
 app.post('/projhome',async(req,res)=>{
     try{

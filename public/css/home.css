@@ -23,6 +23,10 @@
     background-color: ;
     color: white;
   }
+
+  #home{
+    float: left;
+  }
 .login-page{
     position: absolute;
     top: 50%;

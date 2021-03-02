@@ -8,13 +8,14 @@
       
     </style>
 
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
   </head>
 
 
 <body>
 
     <div class="topnav">
+      <a href="/home" id="home">Home</a>
   <a  href="/">Logout</a>
 </div>
     <div class="openBtn">
@@ -48,14 +49,6 @@
       </div>
     </div>
     <br/>
-    <script>
-      function openForm() {
-        document.getElementById("popupForm").style.display = "block";
-      }
-      function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-      }
-    </script>
     
     <table class="styled-table">
         <thead>
@@ -73,16 +66,30 @@
                 <td>{{this.bugname}}</td>
                 <td>{{this.description}}</td>
                 <td>{{this.threat}}</td>
-                <form action="" method="">
-                    <td>Update</td>
-                </form>
-                
-                    <td><button name={{this.bugname}}>Delete</button></td>
-                
+                <td>
+                    <button id="updateForm" value="{{this._id}}" onclick="openForm1(this.value)">Update</button>
+                </td>
+                <td>
+                    <button id="delete"  onclick="location.href = 'http://localhost:3001/home/delete/{{this._id}}'">Delete</button>
+                </td>
             </tr>
             {{/each}}
-        </tbody>
-        
+        </tbody>    
         
     </table>
+    <script>
+            function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+      
+            function openForm1(val) {
+              location.href = 'http://localhost:3001/home/delete/' + val;
+              
+              
+      }
+    </script>
   </body>
+</html>
