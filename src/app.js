@@ -104,7 +104,7 @@ app.get('/home/delete/:id', async(req,res) =>{
     try{
             const updateProject =  await Project.findByIdAndDelete(req.params.id);
             const projectreport = await Project.find();
-            res.render('home',{result:projectreport});
+            res.render('/home');
         
         }catch(e){
         res.send(e);
@@ -113,13 +113,11 @@ app.get('/home/delete/:id', async(req,res) =>{
 
 
 
-app.get('/home/update/:id', async(req,res) =>{
+app.post('/home/update/:id', async(req,res) =>{
     try{
             const updateProject = await Project.findByIdAndUpdate(req.params.id,req.body);
-           // console.log(updateProject);
-
-            const projectreport = await Project.find();
-            res.render('home',{result:projectreport});
+           
+            res.redirect('/home');
     }catch(e){
         res.send(e);
     }
@@ -134,7 +132,7 @@ app.post('/projhome',async(req,res)=>{
 
         //console.log(UserData);
         const projectreport = await Project.find();
-        res.render('home',{result:projectreport});
+        res.redirect('/home');
     
     }catch(e){
         res.status(400).send(e);
